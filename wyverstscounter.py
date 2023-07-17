@@ -15,24 +15,38 @@ import re
 
 HIDE_ON_STARTUP = ["All"]
 ALL_POKEMON = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu", "Sandshrew", "Sandslash", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Clefairy", "Clefable", "Vulpix", "Ninetales", "Jigglypuff", "Wigglytuff", "Zubat", "Golbat", "Oddish", "Gloom", "Vileplume", "Paras", "Parasect", "Venonat", "Venomoth", "Diglett", "Dugtrio", "Meowth", "Persian", "Psyduck", "Golduck", "Mankey", "Primeape", "Growlithe", "Arcanine", "Poliwag", "Poliwhirl", "Poliwrath", "Abra", "Kadabra", "Alakazam", "Machop", "Machoke", "Machamp", "Bellsprout", "Weepinbell", "Victreebel", "Tentacool", "Tentacruel", "Geodude", "Graveler", "Golem", "Ponyta", "Rapidash", "Slowpoke", "Slowbro", "Magnemite", "Magneton", "Farfetch'd", "Doduo", "Dodrio", "Seel", "Dewgong", "Grimer", "Muk", "Shellder", "Cloyster", "Gastly", "Haunter", "Gengar", "Onix", "Drowzee", "Hypno", "Krabby", "Kingler", "Voltorb", "Electrode", "Exeggcute", "Exeggutor", "Cubone", "Marowak", "Hitmonlee", "Hitmonchan", "Lickitung", "Koffing", "Weezing", "Rhyhorn", "Rhydon", "Chansey", "Tangela", "Kangaskhan", "Horsea", "Seadra", "Goldeen", "Seaking", "Staryu", "Starmie", "Mr. Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados", "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Porygon", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Snorlax", "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew", "Chikorita", "Bayleef", "Meganium", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr", "Sentret", "Furret", "Hoothoot", "Noctowl", "Ledyba", "Ledian", "Spinarak", "Ariados", "Crobat", "Chinchou", "Lanturn", "Pichu", "Cleffa", "Igglybuff", "Togepi", "Togetic", "Natu", "Xatu", "Mareep", "Flaaffy", "Ampharos", "Bellossom", "Marill", "Azumarill", "Sudowoodo", "Politoed", "Hoppip", "Skiploom", "Jumpluff", "Aipom", "Sunkern", "Sunflora", "Yanma", "Wooper", "Quagsire", "Espeon", "Umbreon", "Murkrow", "Slowking", "Misdreavus", "Unown", "Wobbuffet", "Girafarig", "Pineco", "Forretress", "Dunsparce", "Gligar", "Steelix", "Snubbull", "Granbull", "Qwilfish", "Scizor", "Shuckle", "Heracross", "Sneasel", "Teddiursa", "Ursaring", "Slugma", "Magcargo", "Swinub", "Piloswine", "Corsola", "Remoraid", "Octillery", "Delibird", "Mantine", "Skarmory", "Houndour", "Houndoom", "Kingdra", "Phanpy", "Donphan", "Porygon2", "Stantler", "Smeargle", "Tyrogue", "Hitmontop", "Smoochum", "Elekid", "Magby", "Miltank", "Blissey", "Raikou", "Entei", "Suicune", "Larvitar", "Pupitar", "Tyranitar", "Lugia", "Ho-Oh", "Celebi", "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp", "Swampert", "Poochyena", "Mightyena", "Zigzagoon", "Linoone", "Wurmple", "Silcoon", "Beautifly", "Cascoon", "Dustox", "Lotad", "Lombre", "Ludicolo", "Seedot", "Nuzleaf", "Shiftry", "Taillow", "Swellow", "Wingull", "Pelipper", "Ralts", "Kirlia", "Gardevoir", "Surskit", "Masquerain", "Shroomish", "Breloom", "Slakoth", "Vigoroth", "Slaking", "Nincada", "Ninjask", "Shedinja", "Whismur", "Loudred", "Exploud", "Makuhita", "Hariyama", "Azurill", "Nosepass", "Skitty", "Delcatty", "Sableye", "Mawile", "Aron", "Lairon", "Aggron", "Meditite", "Medicham", "Electrike", "Manectric", "Plusle", "Minun", "Volbeat", "Illumise", "Roselia", "Gulpin", "Swalot", "Carvanha", "Sharpedo", "Wailmer", "Wailord", "Numel", "Camerupt", "Torkoal", "Spoink", "Grumpig", "Spinda", "Trapinch", "Vibrava", "Flygon", "Cacnea", "Cacturne", "Swablu", "Altaria", "Zangoose", "Seviper", "Lunatone", "Solrock", "Barboach", "Whiscash", "Corphish", "Crawdaunt", "Baltoy", "Claydol", "Lileep", "Cradily", "Anorith", "Armaldo", "Feebas", "Milotic", "Castform", "Kecleon", "Shuppet", "Banette", "Duskull", "Dusclops", "Tropius", "Chimecho", "Absol", "Wynaut", "Snorunt", "Glalie", "Spheal", "Sealeo", "Walrein", "Clamperl", "Huntail", "Gorebyss", "Relicanth", "Luvdisc", "Bagon", "Shelgon", "Salamence", "Beldum", "Metang", "Metagross", "Regirock", "Regice", "Registeel", "Latias", "Latios", "Kyogre", "Groudon", "Rayquaza", "Jirachi", "Deoxys", "Turtwig", "Grotle", "Torterra", "Chimchar", "Monferno", "Infernape", "Piplup", "Prinplup", "Empoleon", "Starly", "Staravia", "Staraptor", "Bidoof", "Bibarel", "Kricketot", "Kricketune", "Shinx", "Luxio", "Luxray", "Budew", "Roserade", "Cranidos", "Rampardos", "Shieldon", "Bastiodon", "Burmy", "Wormadam", "Mothim", "Combee", "Combee", "Vespiquen", "Pachirisu", "Buizel", "Floatzel", "Cherubi", "Cherrim", "Shellos", "Gastrodon", "Ambipom", "Drifloon", "Drifblim", "Buneary", "Lopunny", "Mismagius", "Honchkrow", "Glameow", "Purugly", "Chingling", "Stunky", "Skuntank", "Bronzor", "Bronzong", "Bonsly", "Mime Jr.", "Happiny", "Chatot", "Spiritomb", "Gible", "Gabite", "Garchomp", "Munchlax", "Riolu", "Lucario", "Hippopotas", "Hippowdon", "Skorupi", "Drapion", "Croagunk", "Toxicroak", "Carnivine", "Finneon", "Lumineon", "Mantyke", "Snover", "Abomasnow", "Weavile", "Magnezone", "Lickilicky", "Rhyperior", "Tangrowth", "Electivire", "Magmortar", "Togekiss", "Yanmega", "Leafeon", "Glaceon", "Gliscor", "Mamoswine", "Porygon-Z", "Gallade", "Probopass", "Dusknoir", "Froslass", "Rotom", "Uxie", "Mesprit", "Azelf", "Dialga", "Palkia", "Heatran", "Regigigas", "Giratina", "Cresselia", "Phione", "Manaphy", "Darkrai", "Shaymin", "Arceus", "Victini", "Snivy", "Servine", "Serperior", "Tepig", "Pignite", "Emboar", "Oshawott", "Dewott", "Samurott", "Patrat", "Watchog", "Lillipup", "Herdier", "Stoutland", "Purrloin", "Liepard", "Pansage", "Simisage", "Pansear", "Simisear", "Panpour", "Simipour", "Munna", "Musharna", "Pidove", "Tranquill", "Unfezant", "Blitzle", "Zebstrika", "Roggenrola", "Boldore", "Gigalith", "Woobat", "Swoobat", "Drilbur", "Excadrill", "Audino", "Timburr", "Gurdurr", "Conkeldurr", "Tympole", "Palpitoad", "Seismitoad", "Throh", "Sawk", "Sewaddle", "Swadloon", "Leavanny", "Venipede", "Whirlipede", "Scolipede", "Cottonee", "Whimsicott", "Petilil", "Lilligant", "Basculin", "Sandile", "Krokorok", "Krookodile", "Darumaka", "Darmanitan", "Maractus", "Dwebble", "Crustle", "Scraggy", "Scrafty", "Sigilyph", "Yamask", "Cofagrigus", "Tirtouga", "Carracosta", "Archen", "Archeops", "Trubbish", "Garbodor", "Zorua", "Zoroark", "Minccino", "Cinccino", "Gothita", "Gothorita", "Gothitelle", "Solosis", "Duosion", "Reuniclus", "Ducklett", "Swanna", "Vanillite", "Vanillish", "Vanilluxe", "Deerling", "Sawsbuck", "Emolga", "Karrablast", "Escavalier", "Foongus", "Amoonguss", "Frillish", "Jellicent", "Alomomola", "Joltik", "Galvantula", "Ferroseed", "Ferrothorn", "Klink", "Klang", "Klinklang", "Tynamo", "Eelektrik", "Eelektross", "Elgyem", "Beheeyem", "Litwick", "Lampent", "Chandelure", "Axew", "Fraxure", "Haxorus", "Cubchoo", "Beartic", "Cryogonal", "Shelmet", "Accelgor", "Stunfisk", "Mienfoo", "Mienshao", "Druddigon", "Golett", "Golurk", "Pawniard", "Bisharp", "Bouffalant", "Rufflet", "Braviary", "Vullaby", "Mandibuzz", "Heatmor", "Durant", "Deino", "Zweilous", "Hydreigon", "Larvesta", "Volcarona", "Cobalion", "Terrakion", "Virizion", "Tornadus", "Thundurus", "Reshiram", "Zekrom", "Landorus", "Kyurem"]
-dumpfile = os.path.join(os.path.dirname(sys.argv[0]), "dump2.txt")
+dumpfile = os.path.join(os.path.dirname(sys.argv[0]), "wyverstsdata.txt")
 
+dragging = False
 
 def on_drag(event):
-    global root
+    global root, dragging
+    dragging = True
     root.geometry(f"+{event.x_root - x_clicked}+{event.y_root - y_clicked}")
 
+def on_release(event):
+    global dragging
+    dragging = False
 
 def on_click(event):
-    global root
-    global x_clicked, y_clicked
+    global root, x_clicked, y_clicked
     x_clicked = event.x
     y_clicked = event.y
 
-
 def on_resize(event):
-    global root
-    root.geometry(f"{event.width}x{event.height}")
+    global root, dragging
+    if not dragging:  # Check if not in dragging state
+        root.geometry(f"{event.width}x{event.height}")
+
+
+def process_input():
+    global input_textbox
+    input_text = input_textbox.get("1.0", "end-1c").strip()  # Get the input text from the text box
+
+    # Process the input (you can replace this with your custom processing logic)
+    add_to_counter(input_text)
+    # Clear the input text box for the next input
+    input_textbox.delete("1.0", "end")
 
 
 root = tk.Tk()
@@ -46,6 +60,10 @@ root.title("Wyverst's Counter")
 sv = tk.StringVar(root)
 # Make the window resizable
 root.resizable(True, True)
+
+input_textbox = tk.Text(root, wrap=tk.WORD, height=4, width=50)
+input_textbox.bind("<Return>", lambda event: process_input())
+
 hidden = []
 
 #t1 = tk.Text(root, height=15, width=20)
@@ -54,9 +72,10 @@ hidden = []
 
 counter = {}
 j = 0
-region_of_interest = (520, 260, 2350, 460)
+region_of_interest = (520, 260, 2350, 480)
 targets = []
-master = [targets, counter]
+settings = [True, False]
+master = [targets, counter, hidden, settings]
 
 
 def run_game():
@@ -80,6 +99,7 @@ def run_game():
     label = tk.Label(root, textvariable=sv)
     #label = tk.Label(root, text="hi")
     label.pack()
+    input_textbox.pack()
     jawn2()
     root.mainloop()
 
@@ -140,9 +160,10 @@ def jawn():
 
 def capture_window(window_title):
     windows = Quartz.CGWindowListCopyWindowInfo(Quartz.kCGWindowListOptionOnScreenOnly, Quartz.kCGNullWindowID)
-    #print(windows)
+
     for window in windows:
         window_title_value = window.get("kCGWindowOwnerName", "")
+        window_name_value = window.get("kCGWindowName", "")
         if window_title_value == window_title:
             window_id = window["kCGWindowNumber"]
             region = Quartz.CGRectNull
@@ -151,18 +172,24 @@ def capture_window(window_title):
             height = Quartz.CGImageGetHeight(image)
             bytes_per_row = Quartz.CGImageGetBytesPerRow(image)
             pixel_data = Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(image))
-            image = Image.frombytes("RGB", (width, height), pixel_data, "raw", "RGBX", bytes_per_row, 1)
-            return image
+            # Check if pixel_data is not None before proceeding
+            if pixel_data is not None:
+                # Determine the correct image mode based on the pixel data's format
+                image_mode = "RGB" if bytes_per_row == (width * 4) else "RGBA"
+
+                # Create the PIL image with the correct size and mode
+                image = Image.frombytes(image_mode, (width, height), pixel_data, "raw", image_mode, bytes_per_row, 1)
+                return image
+
     return None
 
 
 def extract_text(image, region):
-    punctuation_pattern = r'[!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]'
     ret = []
     cropped_image = image.crop(region)  # Crop the image to the region of interest
     cropped_image = make_non_white_black(cropped_image)
     # checkpoint1
-    #cropped_image.show()
+    cropped_image.show()
     text = pytesseract.image_to_string(cropped_image)
 
     return re.split(r"\s+|\W+", text)
@@ -171,22 +198,37 @@ def extract_text(image, region):
 def process_image(image):
     # Convert the image to grayscale for better OCR results
     gray_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+
+    # Normalize the pixel values to the range [0, 255]
+    gray_image = cv2.normalize(gray_image, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+
     processed_image = Image.fromarray(gray_image)
     return processed_image
 
 
 def add_to_counter(user_input2):
+    if user_input2 is None or len(user_input2) == 0:
+        return
     user_input1 = user_input2[:1].capitalize() + user_input2[1:].lower()
     global counter
     global master
     global targets
     global hidden
+    global settings
     # Add user input to the counter
     if user_input1 is None or len(user_input1) == 0:
         return
     if user_input1 == "Exit" or user_input1 == "Quit":
         dump()
         os._exit(0)
+    elif user_input1 == "Settings":
+        print("Settings: Save Hidden: " + str(settings[0]) + " Auto Add: " + str(settings[1]))
+    elif user_input1 == "Savehidden":
+        settings[0] = not settings[0]
+        print("Save hidden set to " + str(settings[0]))
+    elif user_input1 == "Autoadd":
+        settings[1] = not settings[1]
+        print("Auto add set to " + str(settings[1]))
     elif user_input1 == "Hideall" or user_input1 == "Hide all":
         for item in counter.keys():
             hidden.append(item)
@@ -203,7 +245,7 @@ def add_to_counter(user_input2):
     elif user_input1 == "Wipe all data":
         counter = {}
         targets = []
-        master = [targets, counter]
+        master = [targets, counter, hidden, [True, False]]
         dump()
     else:
         if user_input1 not in counter.keys() and user_input1 in ALL_POKEMON:
@@ -214,11 +256,15 @@ def add_to_counter(user_input2):
 
     targets = master[0]
     counter = master[1]
+    hidden = master[2]
+    settings = master[3]
 
 
 def dump():
     global dumpfile
     with open(dumpfile, "w") as file:
+        master[2] = hidden
+        master[3] = settings
         json.dump(master, file, indent=4)
     #print("Data dumped to '{}'! Please use the file for future loading.".format("dump2.txt"))
 
@@ -228,22 +274,28 @@ def load():
     global master
     global targets
     global counter
+    global hidden
+    global settings
     with open(dumpfile, "r") as file:
         master = json.load(file)
         targets = master[0]
         counter = master[1]
+        hidden = master[2]
+        settings = master[3]
 
     allj = False
-    for item in HIDE_ON_STARTUP:
-        item = item[:1].capitalize() + item[1:].lower()
-        if item == "All":
-            allj = True
-            for item2 in counter.keys():
-                hidden.append(item2)
-        else:
-            if not allj:
-                if item in ALL_POKEMON:
-                    hidden.append(item)
+    if not settings[0]:
+        hidden = []
+        for item in HIDE_ON_STARTUP:
+            item = item[:1].capitalize() + item[1:].lower()
+            if item == "All":
+                allj = True
+                for item2 in counter.keys():
+                    hidden.append(item2)
+            else:
+                if not allj:
+                    if item in ALL_POKEMON:
+                        hidden.append(item)
 
 
 def get_four_corner_pixels(img):
@@ -295,20 +347,41 @@ def main():
     data_detected = False
     print("Type a Pokemon species to add to counter, or -Pokemon to remove from counter, or exit/quit to save data and close program.")
     corners = []
+    print(f"Counter: {sorted(master[1].items(), key=lambda x: x[1], reverse=True)}")
     while True:
         # Capture the specific window
         window_image = capture_window(target_window_title)
+        #print(time.time())
 
         if window_image is not None:
             # Process the image and extract text as before
             processed_image = process_image(window_image)
+            #processed_image.show()
+            """
             region_of_interest2 = []
             region_of_interest2.append(int(processed_image.height * float(520/2156)))
             region_of_interest2.append(int(processed_image.width * float(260/3592)))
             region_of_interest2.append(int(processed_image.height * float(2350/2156)))
             region_of_interest2.append(int(processed_image.width * float(460/3592)))
-            # region_of_interest = (520, 260, 2350, 460)
+            # region_of_interest = (520, 260, 2350, 480)
             region_of_interest = tuple(region_of_interest2)
+            print(region_of_interest)
+            """
+            width_length = region_of_interest[2] - region_of_interest[0]
+            height_length = region_of_interest[3] - region_of_interest[1]
+
+            # Determine the center coordinates of the processed_image
+            image_width, image_height = processed_image.size
+            center_x = image_width / 2
+            center_y = image_height / 5
+
+            # Calculate the coordinates to crop the square from the center
+            x_start = center_x - (width_length / 2)
+            x_end = center_x + (width_length / 2)
+            y_start = center_y - (height_length / 2)
+            y_end = center_y + (height_length / 2) + 20
+            region_of_interest = tuple([x_start, y_start, x_end, y_end])
+            #print(region_of_interest)
             extracted_text = extract_text(processed_image, region_of_interest)
             #print(extracted_text)
 
@@ -316,11 +389,18 @@ def main():
             #print(extracted_text)
             #text_found = any(item in target_text for item in extracted_text)
             count = 0
+            fuzzscore = 70
             text_found = False
-            for item in master[0]:
-                for word in extracted_text:
-                    if fuzz.ratio(word, item) > 60:
-                        text_found = True
+            if not settings[1]:
+                for item in master[0]:
+                    for word in extracted_text:
+                        if fuzz.ratio(word, item) > fuzzscore:
+                            text_found = True
+            else:
+                for item in ALL_POKEMON:
+                    for word in extracted_text:
+                        if fuzz.ratio(word, item) > fuzzscore:
+                            text_found = True
 
             #print(text_found)
 
@@ -329,11 +409,21 @@ def main():
 
                 data_detected = True
                 corners = get_four_corner_pixels(make_non_white_black(processed_image.crop(region_of_interest)))
-                for item in master[0]:
-                    for word in extracted_text:
-                        if fuzz.ratio(word, item) > 60:
-                            master[1][item] = master[1].get(item, 0) + 1
+                if not settings[1]:
+                    for item in master[0]:
+                        for word in extracted_text:
+                            if fuzz.ratio(word, item) > fuzzscore:
+                                master[1][item] = master[1].get(item, 0) + 1
+                else:
+                    for item in ALL_POKEMON:
+                        for word in extracted_text:
+                            if fuzz.ratio(word, item) > fuzzscore:
+                                master[1][item] = master[1].get(item, 0) + 1
+                                if item not in master[0]:
+                                    master[0].append(item)
                 # wait for background to stop moving
+                print(f"Counter: {sorted(master[1].items(), key=lambda x: x[1], reverse=True)}")
+                dump()
                 time.sleep(2)
                 #processed_image.show()
 
@@ -359,7 +449,7 @@ def main():
 
         # Display the counter on the screen
         if i%10 == 0:
-            print(f"Counter: {sorted(master[1].items(), key=lambda x: x[1], reverse=True)}")
+            #print(f"Counter: {sorted(master[1].items(), key=lambda x: x[1], reverse=True)}")
             dump()
         i+=1
 
